@@ -1,0 +1,152 @@
+.product-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  height: 100%;
+  position: relative;
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-5px);
+}
+
+.product-image-container {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #007185;
+}
+
+.product-title:hover {
+  color: #c45500;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffa41c;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.rating-text {
+  color: #007185;
+  margin-left: 4px;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.product-price span {
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+  top: -6px;
+}
+
+.product-description {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.add-to-cart-btn.disabled {
+  background-color: #f0f2f2;
+  border-color: #d5d9d9;
+  color: #565959;
+  cursor: not-allowed;
+}
+
+.product-stock-status {
+  margin: 8px 0;
+  font-size: 13px;
+}
+
+.stock-msg {
+  font-weight: 500;
+}
+
+.stock-msg.in {
+  color: #007600;
+}
+
+.stock-msg.low {
+  color: #B12704;
+}
+
+.stock-msg.out {
+  color: #d93025;
+}
+
+.out-of-stock-card {
+  opacity: 0.8;
+}
+
+.out-of-stock-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border: 1px solid #d5d9d9;
+  border-radius: 4px;
+  font-weight: 700;
+  color: #d93025;
+  white-space: nowrap;
+  pointer-events: none;
+}
