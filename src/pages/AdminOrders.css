@@ -539,29 +539,32 @@
     display: none;
   }
   
-  .grid-row {
+  .admin-orders-page .grid-row {
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 20px;
   }
   
-  .product-info {
+  .admin-orders-page .product-info {
     flex-direction: row;
     gap: 16px;
   }
   
-  .tiny-img, .tiny-img-placeholder {
+  .admin-orders-page .tiny-img, 
+  .admin-orders-page .tiny-img-placeholder {
     width: 70px;
     height: 70px;
   }
   
-  .subtotal {
+  .admin-orders-page .subtotal {
     text-align: left;
     border-top: 1px solid #f1f5f9;
     padding-top: 12px;
   }
   
-  .unit-price, .qty {
+  .admin-orders-page .unit-price, 
+  .admin-orders-page .qty {
     font-size: 14px;
   }
 }
+

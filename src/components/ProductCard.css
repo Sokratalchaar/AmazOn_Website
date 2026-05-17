@@ -150,3 +150,52 @@
   white-space: nowrap;
   pointer-events: none;
 }
+
+/* Mobile Responsiveness for Product Cards */
+@media (max-width: 576px) {
+  .product-image-container {
+    height: 160px;
+    padding: 12px;
+  }
+
+  .product-info {
+    padding: 12px;
+  }
+
+  .product-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .product-rating {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .product-price {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .product-price span {
+    font-size: 12px;
+    top: -5px;
+  }
+
+  .product-stock-status {
+    margin: 4px 0;
+    font-size: 12px;
+  }
+
+  .product-description {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .add-to-cart-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-top: 5px;
+  }
+}
+
