@@ -158,3 +158,71 @@
   padding-top: 20px;
   border-top: 1px solid var(--border);
 }
+
+/* Responsive Styles for Admin Panel */
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 20px 10px;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .admin-header h1 {
+    font-size: 24px;
+  }
+
+  .admin-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 15px;
+    gap: 15px;
+  }
+
+  .admin-item-img {
+    width: 80px;
+    height: 80px;
+    align-self: center;
+  }
+
+  .admin-item-info {
+    width: 100%;
+  }
+
+  .admin-item-meta {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .admin-actions {
+    width: 100%;
+    margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+  }
+
+  .admin-actions button {
+    flex: 1;
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .admin-form-container {
+    padding: 20px 15px;
+  }
+
+  .admin-form-container h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
+

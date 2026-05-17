@@ -125,3 +125,22 @@
   width: 18px;
   height: 18px;
 }
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 20px 10px;
+  }
+
+  .auth-card {
+    padding: 25px 15px;
+  }
+
+  .auth-header {
+    margin-bottom: 20px;
+  }
+
+  .auth-header h1 {
+    font-size: 24px;
+  }
+}
+
