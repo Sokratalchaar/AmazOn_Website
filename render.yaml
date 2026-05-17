@@ -1,0 +1,24 @@
+services:
+  # Frontend Static Site
+  - type: static
+    name: amazon-website-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    routes:
+      # Rewrite all requests to index.html to allow React Router client-side routing
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # Backend Web Service
+  - type: web
+    name: amazon-website-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5000
