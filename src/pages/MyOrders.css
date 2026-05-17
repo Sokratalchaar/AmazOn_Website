@@ -603,10 +603,13 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     width: 100%;
+    text-align: left;
   }
 
   .meta-item {
     min-width: 0;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .meta-item.SHIP-TO {
@@ -614,7 +617,10 @@
     border-top: 1px dashed #e2e8f0;
     padding-top: 8px;
     margin-top: 4px;
+    align-items: flex-start;
+    text-align: left;
   }
+
 
   .header-order-id {
     align-items: flex-start;
