@@ -22,23 +22,43 @@ const ProtectedAdminRoute = ({ children }) => {
   return children;
 };
 
+// Track whether the page originally booted up with active Google OAuth credentials in the URL
+let initialHasAuthParams = false;
+
+const stripAuthParamsFromURL = () => {
+  const hasAuthParams = 
+    (window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('id_token='))) ||
+    (window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error=') || window.location.search.includes('access_token=')));
+
+  if (hasAuthParams) {
+    initialHasAuthParams = true;
+    // Wipe credentials immediately from the address bar synchronously on boot,
+    // ensuring the browser history stack never records the dirty URL.
+    window.history.replaceState(null, '', window.location.pathname);
+  }
+};
+stripAuthParamsFromURL();
+
 const AuthCallbackHandler = () => {
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin, loading } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    const hasAuthParams = 
-      (window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('id_token='))) ||
-      (window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error=') || window.location.search.includes('access_token=')));
-
-    if (hasAuthParams && user) {
-      const targetRoute = isAdmin ? '/admin' : '/';
-      
-      // Clean up URL and replace the history state to prevent back button issues
-      navigate(targetRoute, { replace: true });
+    if (initialHasAuthParams) {
+      if (user) {
+        const targetRoute = isAdmin ? '/admin' : '/';
+        // Cleanly redirect the successful login to the homepage/dashboard
+        navigate(targetRoute, { replace: true });
+        initialHasAuthParams = false;
+      } else if (!loading) {
+        // Safe Fallback Redirect: If the auth load finished but user remains null,
+        // it means the OAuth callback is stale, expired, or already consumed.
+        // We cleanly redirect them to the home page to avoid rendering a broken screen.
+        navigate('/', { replace: true });
+        initialHasAuthParams = false;
+      }
     }
-  }, [user, isAdmin, navigate, location]);
+  }, [user, isAdmin, loading, navigate]);
 
   return null;
 };
@@ -71,6 +91,8 @@ function App() {
               <Route path="/my-orders" element={<MyOrders />} />
               <Route path="/orders/:id" element={<OrderDetails />} />
               <Route path="/products/:id" element={<ProductDetails />} />
+              {/* Fallback route to redirect unmatched paths cleanly to the homepage */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
             
             <footer className="footer">
