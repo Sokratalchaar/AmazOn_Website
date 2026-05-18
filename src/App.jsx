@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Checkout from './pages/Checkout';
@@ -12,7 +12,6 @@ import OrderDetails from './pages/OrderDetails';
 import ProductDetails from './pages/ProductDetails';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { Navigate } from 'react-router-dom';
 import './App.css';
 
 const ProtectedAdminRoute = ({ children }) => {
@@ -23,6 +22,27 @@ const ProtectedAdminRoute = ({ children }) => {
   return children;
 };
 
+const AuthCallbackHandler = () => {
+  const { user, isAdmin } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const hasAuthParams = 
+      (window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('id_token='))) ||
+      (window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error=') || window.location.search.includes('access_token=')));
+
+    if (hasAuthParams && user) {
+      const targetRoute = isAdmin ? '/admin' : '/';
+      
+      // Clean up URL and replace the history state to prevent back button issues
+      navigate(targetRoute, { replace: true });
+    }
+  }, [user, isAdmin, navigate, location]);
+
+  return null;
+};
+
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -30,6 +50,7 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <Router>
+          <AuthCallbackHandler />
           <div className="app">
             <Navbar onSearch={setSearchTerm} />
             <Routes>
